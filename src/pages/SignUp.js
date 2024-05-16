@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
+
 const SignUp = () => {
   const history = useNavigate();
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const SignUp = () => {
     email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +24,11 @@ const SignUp = () => {
     let response
     try {
       response = await axios.post('http://localhost:5000/user/signup', formData);
-      if(response.status==201) alert("Successfully Submitted")
+      if(response.status==201){
+        alert("Successfully Submitted")
+        navigate("/login")
+        
+      }
     
     } catch (error) {
       console.error('Error signing up:', error);

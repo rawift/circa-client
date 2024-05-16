@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "./Login.css"
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,6 +23,7 @@ const Login = () => {
       });
       console.log(response)
       alert(response.data.message)
+      navigate("/home")
     } catch (error) {
       alert(error.response.data.message)
       console.error('Error logging in:', error.response.data.message);

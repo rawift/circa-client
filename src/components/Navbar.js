@@ -136,10 +136,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 
-const Navbar = () => {
+const Navbar = ({query,setQuery}) => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
   const handleLive = async () => {
     if (user.isworker) {
       try {
@@ -154,8 +153,7 @@ const Navbar = () => {
     }
   };
   const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-    // You can add search functionality here
+    setQuery(e.target.value)
   };
   return (
     <nav className="navbar navbar-expand-lg rounded bg-primary-subtle" aria-label="Eleventh navbar example">
@@ -177,7 +175,7 @@ const Navbar = () => {
               type="text"
               className="form-control"
               placeholder="Search"
-              value={searchQuery}
+              value={query}
               onChange={handleSearch}
             />
             <button className="btn btn-outline-secondary" type="button" id="button-addon2">
